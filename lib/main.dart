@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 
 // main entry to flutter app
@@ -65,7 +66,7 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
   @override
   Widget build(BuildContext context) {
 // For the To do task hint: consider defining the widget and name of the tabs here
-    final tabs = ['Text', 'Image', 'Button', 'List View'];
+    final tabs = ['Text', 'Image', 'Weather', 'List View'];
 
     return Scaffold(
       appBar: AppBar(
@@ -149,18 +150,42 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
           // Tab 3 color = Light Blue, Title of tab = Button Widget
           Container(
             color: Colors.blue[50], // light blue shade range
-            child: Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Button pressed in ${tabs[2]} tab!'),
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Column(  
+                  crossAxisAlignment: crossAxisAlignment.stretch,
+                  children: [
+                    TextField(
+                      controller: _cityController,
+                      decoration: InputDecoration(
+                        labelText: 'Enter Desired City',
+                        border: OutlineInputBorder(),
+                      ),
                     ),
-                  );
-                },
-                child: Text('Click Me'),
+                    SizedBox(height: 16),
+                    ElevatedButton(
+                      onPressed: _fetchWeather,
+                      child: Text('Fetch Weather'),
+                    ),
+                    SizedBox(hieght: 32),
+                    if (_cityName.isNotEmpty)
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: _weeklyForecast.length,
+                          itemBuilder: (context, index) {
+                            final dayForecast = _weeklyForecast[index];
+                            return Card(
+                              child: ListTile(
+                                title: Text('${dayForecast['day']}:${dayForecast['temp']}'),
+                                subtitle: Text(dayForecast['condition']!)
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                  ],
+                ),
               ),
-            ),
           ),
 
               // Tab 4 color = Light Teal, Title of tab = ListView Widget
