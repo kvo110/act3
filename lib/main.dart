@@ -63,6 +63,30 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
     super.dispose();
   }
 
+  final TextEditingController _cityController = TextEditingController();
+  String _cityName = '';
+  List<String> _days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  
+  List<Map<String, String>> _weeklyForecast = [];
+
+  void _fetchWeather() {
+    final random = Random();
+    final conditions = ['Sunny', 'Cloudy', 'Rainy'];
+
+    setState(() {
+      _cityName = _cityController.text;
+      _weeklyForecast = _days.map((day) {
+        final temp = 15 + random.nextInt(18);
+        final condition = conditions[random.nextInt(conditions.length)];
+        return {
+          'day': day,
+          'temp': '$temp°F',
+          'condition': condition,
+        };
+      }).toList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
 // For the To do task hint: consider defining the widget and name of the tabs here
