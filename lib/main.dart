@@ -76,7 +76,7 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
     setState(() {
       _cityName = _cityController.text;
       _weeklyForecast = _days.map((day) {
-        final temp = 15 + random.nextInt(18);
+        final temp = 60 + random.nextInt(71);
         final condition = conditions[random.nextInt(conditions.length)];
         return {
           'day': day,
