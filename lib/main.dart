@@ -177,7 +177,7 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
             child: Padding(
               padding: EdgeInsets.all(16.0),
               child: Column(  
-                  crossAxisAlignment: crossAxisAlignment.stretch,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     TextField(
                       controller: _cityController,
@@ -191,7 +191,7 @@ class __TabsNonScrollableDemoState extends State<_TabsNonScrollableDemo>
                       onPressed: _fetchWeather,
                       child: Text('Fetch Weather'),
                     ),
-                    SizedBox(hieght: 32),
+                    SizedBox(height: 32),
                     if (_cityName.isNotEmpty)
                       Expanded(
                         child: ListView.builder(
